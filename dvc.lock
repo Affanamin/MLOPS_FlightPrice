@@ -1,0 +1,34 @@
+schema: '2.0'
+stages:
+  load_data:
+    cmd: python src/load_data.py --config=params.yaml
+    deps:
+    - path: data_given/Data_Train.xlsx
+      md5: 756221384eb61ff168c5db6b81438501
+      size: 530389
+    - path: src/get_data.py
+      md5: cf49c226d4e3e6af64e5a4ca2773e3c0
+      size: 692
+    - path: src/load_data.py
+      md5: 402824bf871045dc492b9b1b846587cc
+      size: 663
+    outs:
+    - path: data/raw/Data_Train.csv
+      md5: ea995518999e47766c19cedb8b1510bf
+      size: 1107157
+  split_data:
+    cmd: python src/split_data.py --config=params.yaml
+    deps:
+    - path: data/raw/Data_Train.csv
+      md5: ea995518999e47766c19cedb8b1510bf
+      size: 1107157
+    - path: src/split_data.py
+      md5: 53b1916eb1a7e30b7676308ae98f3efd
+      size: 1051
+    outs:
+    - path: data/processed/test_flightprice.csv
+      md5: 69e521e2d3fd0e00064edc9b12383a5e
+      size: 222346
+    - path: data/processed/train_flightprice.csv
+      md5: e3abf2c8b7e3278975a7348204f3c385
+      size: 884926

@@ -16,8 +16,8 @@ def read_params(config_path):
 def get_data(config_path):
     config = read_params(config_path)
 
-    data_path = config["data_source"]["s3_source"]
-    df =  pd.read_excel(data_path)
+    data_path = config["data_source_Train"]["s3_source"]
+    df = pd.read_excel(data_path)
     return df
 ### Extra Comment
 ### Extra Comment 222

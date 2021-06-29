@@ -10,7 +10,7 @@ data_source_Test:
   s3_source: data_given/Test_set.xlsx
 
 load_data:
-  raw_dataset_csv: data/raw/Data_Train.xlsx
+  raw_dataset_csv: data/raw/Data_Train.csv
 
 split_data:
   train_path: data/processed/train_flightprice.csv

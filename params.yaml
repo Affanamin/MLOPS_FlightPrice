@@ -12,20 +12,44 @@ data_source_Test:
 load_data:
   raw_dataset_csv: data/raw/Data_Train.csv
 
-split_data:
+Stage1_preprocess:
   train_path: data/processed/train_flightprice.csv
-  test_path: data/processed/test_flightprice.csv
+
+Stage2_preprocess:
+  train_path: data/Transformed01/train_flightprice.csv
+
+Stage3_preprocess:
+  train_path: data/Transformed02/train_flightprice.csv
+
+Stage4_preprocess:
+  train_path: data/Transformed03/train_flightprice.csv
+
+Stage5_preprocess:
+  train_path: data/Transformed04/train_flightprice.csv
+
+Stage6_preprocess:
+  train_path: data/Transformed05/train_flightprice.csv
+
+Stage7_preprocess:
+  train_path: data/Transformed06/train_flightprice.csv
+
+Stage8_preprocess:
+  train_path: data/Transformed07/train_flightprice.csv
+
+split_data:
+  train_path: data/Transformed08/train_flightprice.csv
+  test_path: data/Transformed08/test_flightprice.csv
   test_size: 0.2
 
 estimators:
   ElasticNet:
     params:
-#      alpha: 0.88
-#      l1_ratio: 0.89
+      alpha: 0.88
+      l1_ratio: 0.89
       #alpha: 0.9
       #l1_ratio: 0.4
-      alpha: 0.9
-      l1_ratio: 0.6
+      #alpha: 0.9
+      #l1_ratio: 0.6
 model_dir: saved_models
 
 reports:

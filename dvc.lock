@@ -19,16 +19,142 @@ stages:
   split_data:
     cmd: python src/split_data.py --config=params.yaml
     deps:
+    - path: data/Transformed07/train_flightprice.csv
+      md5: 1bea79e4a57809350ef7b10ace1c9fe2
+      size: 641460
+    - path: src/split_data.py
+      md5: 8fff9d487bffddeeae92222a4a70de36
+      size: 1050
+    outs:
+    - path: data/Transformed08/test_flightprice.csv
+      md5: 31ac0ea90da8c56f7945b6ce4b76ffe7
+      size: 128597
+    - path: data/Transformed08/train_flightprice.csv
+      md5: eb620b32cb482dc0eab8c2c7e6a8663f
+      size: 513151
+  Handle_Nulls:
+    cmd: python src/handlingnull.py --config=params.yaml
+    deps:
     - path: data/raw/Data_Train.csv
       md5: ea995518999e47766c19cedb8b1510bf
       size: 1107157
-    - path: src/split_data.py
-      md5: 53b1916eb1a7e30b7676308ae98f3efd
-      size: 1051
+    - path: src/handlingnull.py
+      md5: a27e3790b132cbffb8a8b4fb8c3dfa4a
+      size: 658
     outs:
-    - path: data/processed/test_flightprice.csv
-      md5: 69e521e2d3fd0e00064edc9b12383a5e
-      size: 222346
     - path: data/processed/train_flightprice.csv
-      md5: e3abf2c8b7e3278975a7348204f3c385
-      size: 884926
+      md5: f3865a0033c7228c84be28c085d7082c
+      size: 1107081
+  Data_Transformation_01:
+    cmd: python src/dataTransfomration01.py --config=params.yaml
+    deps:
+    - path: data/processed/train_flightprice.csv
+      md5: f3865a0033c7228c84be28c085d7082c
+      size: 1107081
+    - path: src/dataTransfomration01.py
+      md5: 4a65887934194a08478479553900cd4d
+      size: 1021
+    outs:
+    - path: data/Transformed01/train_flightprice.csv
+      md5: b3279741e45e55839f89e993db8318c3
+      size: 1095976
+  Data_Transformation_02:
+    cmd: python src/dataTransformation02.py --config=params.yaml
+    deps:
+    - path: data/Transformed01/train_flightprice.csv
+      md5: b3279741e45e55839f89e993db8318c3
+      size: 1095976
+    - path: src/dataTransformation02.py
+      md5: f63504551d4520217110ee84dafd9768
+      size: 1567
+    outs:
+    - path: data/Transformed02/train_flightprice.csv
+      md5: b76cea7673e3952df5f084e547562399
+      size: 1077731
+  Data_Transformation_03:
+    cmd: python src/dataTransformation03.py --config=params.yaml
+    deps:
+    - path: data/Transformed02/train_flightprice.csv
+      md5: b76cea7673e3952df5f084e547562399
+      size: 1077731
+    - path: src/dataTransformation03.py
+      md5: a278614fa0d6a8cea885ab78852d96ac
+      size: 1415
+    outs:
+    - path: data/Transformed03/train_flightprice.csv
+      md5: 44105a4e34d58b4447c043a31088312f
+      size: 972944
+  Data_Transformation_04:
+    cmd: python src/dataTransformation04.py --config=params.yaml
+    deps:
+    - path: data/Transformed03/train_flightprice.csv
+      md5: 44105a4e34d58b4447c043a31088312f
+      size: 972944
+    - path: src/dataTransformation04.py
+      md5: f1992a8926ecf7fa0d3464711f5cf1f7
+      size: 1528
+    outs:
+    - path: data/Transformed04/train_flightprice.csv
+      md5: e4541899783c9a1c17420fca9f6bae7c
+      size: 1030731
+  Data_Transformation_05:
+    cmd: python src/dataTransformation05.py --config=params.yaml
+    deps:
+    - path: data/Transformed04/train_flightprice.csv
+      md5: e4541899783c9a1c17420fca9f6bae7c
+      size: 1030731
+    - path: src/dataTransformation05.py
+      md5: 1c13b72740af81a499a60e39f167edf8
+      size: 1211
+    outs:
+    - path: data/Transformed05/train_flightprice.csv
+      md5: a82f1d22a7ddbdbcda6e28dbc8fa1c7b
+      size: 1244345
+  Data_Transformation_06:
+    cmd: python src/dataTransformation06.py --config=params.yaml
+    deps:
+    - path: data/Transformed05/train_flightprice.csv
+      md5: a82f1d22a7ddbdbcda6e28dbc8fa1c7b
+      size: 1244345
+    - path: src/dataTransformation06.py
+      md5: 0d2e2a424cd829ea3e72ef9f361164a8
+      size: 1086
+    outs:
+    - path: data/Transformed06/train_flightprice.csv
+      md5: 30f31d7c8083f06c0fd8a8c4f9ae4a21
+      size: 1201679
+  Data_Transformation_07:
+    cmd: python src/dataTransformation07.py --config=params.yaml
+    deps:
+    - path: data/Transformed06/train_flightprice.csv
+      md5: 30f31d7c8083f06c0fd8a8c4f9ae4a21
+      size: 1201679
+    - path: src/dataTransformation07.py
+      md5: 9edc37b5c4b834037aed02a6fc4d21c6
+      size: 1406
+    outs:
+    - path: data/Transformed07/train_flightprice.csv
+      md5: 1bea79e4a57809350ef7b10ace1c9fe2
+      size: 641460
+  train_and_evaluate:
+    cmd: python src/train_and_evaluate.py --config=params.yaml
+    deps:
+    - path: data/Transformed08/test_flightprice.csv
+      md5: 31ac0ea90da8c56f7945b6ce4b76ffe7
+      size: 128597
+    - path: data/Transformed08/train_flightprice.csv
+      md5: eb620b32cb482dc0eab8c2c7e6a8663f
+      size: 513151
+    - path: src/train_and_evaluate.py
+      md5: 92a34a42df2aaf2c49d113dfc9ce5437
+      size: 2810
+    params:
+      params.yaml:
+        estimators.ElasticNet.params.alpha: 0.88
+        estimators.ElasticNet.params.l1_ratio: 0.89
+  log_production_model:
+    cmd: python src/log_production_model.py --config=params.yaml
+    deps:
+    - path: src/log_production_model.py
+      md5: 98b6a301382d885bbd5b9edbb45ae309
+      size: 1943

@@ -26,8 +26,11 @@ def eval_metrics(actual, pred):
 
 def train_and_evaluate(config_path):
     config = read_params(config_path)
+
     test_data_path = config["split_data"]["test_path"]
     train_data_path = config["split_data"]["train_path"]
+
+
     random_state = config["base"]["random_state"]
     model_dir = config["model_dir"]
 
